@@ -52,7 +52,7 @@ A React + Vite client application for managing a coffee store inventory. This ap
 
 ### Backend
 
-This client expects a backend API running at `http://localhost:3000/coffees`. Make sure to start your backend server before using the app.
+This client expects a backend API running at `https://v1-coffee-store-server-psi.vercel.app/coffees`. Make sure to start your backend server before using the app.
 
 ## Project Structure
 

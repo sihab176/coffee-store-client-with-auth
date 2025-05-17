@@ -8,6 +8,10 @@ import Home from "./components/Home.jsx";
 import AddCoffee from "./components/AddCoffee.jsx";
 import UpdateCoffee from "./components/UpdateCoffee.jsx";
 import CoffeeDetails from "./components/CoffeeDetails.jsx";
+import Login from "./components/authentiction/Login.jsx";
+import Singup from "./components/authentiction/Singup.jsx";
+import AuthProvider from "./context/authProvider.jsx";
+import Users from "./components/Users.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,21 +19,34 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("http://localhost:3000/coffees"),
+        loader: () =>
+          fetch("https://v1-coffee-store-server-psi.vercel.app/coffees"),
         Component: Home,
       },
       { path: "/addCoffee", Component: AddCoffee },
       {
         path: "/updateCoffee/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/coffees/${params.id}`),
+          fetch(
+            `https://v1-coffee-store-server-psi.vercel.app/coffees/${params.id}`
+          ),
         Component: UpdateCoffee,
       },
       {
         path: "/coffeeDetails/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/coffees/${params.id}`),
+          fetch(
+            `https://v1-coffee-store-server-psi.vercel.app/coffees/${params.id}`
+          ),
         Component: CoffeeDetails,
+      },
+      { path: "/login", Component: Login },
+      { path: "/signUp", Component: Singup },
+      {
+        path: "/user",
+        loader: () =>
+          fetch("https://v1-coffee-store-server-psi.vercel.app/users"),
+        Component: Users,
       },
     ],
   },
@@ -37,6 +54,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
